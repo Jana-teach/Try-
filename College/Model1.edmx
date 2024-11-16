@@ -1,0 +1,143 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="CollegeModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Department">
+          <Key>
+            <PropertyRef Name="D_ID" />
+          </Key>
+          <Property Name="D_Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="D_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Student">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="Did" Type="int" />
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="S_Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="S_Age" Type="int" />
+          <Property Name="S_Email" Type="nvarchar" MaxLength="50" />
+          <Property Name="S_Password" Type="nvarchar" MaxLength="50" />
+          <Property Name="S_Address" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <Association Name="FK__Student__Did__398D8EEE">
+          <End Role="Department" Type="Self.Department" Multiplicity="0..1" />
+          <End Role="Student" Type="Self.Student" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Department">
+              <PropertyRef Name="D_ID" />
+            </Principal>
+            <Dependent Role="Student">
+              <PropertyRef Name="Did" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="CollegeModelStoreContainer">
+          <EntitySet Name="Department" EntityType="Self.Department" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Student" EntityType="Self.Student" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Student__Did__398D8EEE" Association="Self.FK__Student__Did__398D8EEE">
+            <End Role="Department" EntitySet="Department" />
+            <End Role="Student" EntitySet="Student" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="CollegeModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Department">
+          <Key>
+            <PropertyRef Name="D_ID" />
+          </Key>
+          <Property Name="D_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="D_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="Students" Relationship="Self.FK__Student__Did__398D8EEE" FromRole="Department" ToRole="Student" />
+        </EntityType>
+        <EntityType Name="Student">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="Did" Type="Int32" />
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="S_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="S_Age" Type="Int32" />
+          <Property Name="S_Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="S_Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="S_Address" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Department" Relationship="Self.FK__Student__Did__398D8EEE" FromRole="Student" ToRole="Department" />
+        </EntityType>
+        <Association Name="FK__Student__Did__398D8EEE">
+          <End Role="Department" Type="Self.Department" Multiplicity="0..1" />
+          <End Role="Student" Type="Self.Student" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Department">
+              <PropertyRef Name="D_ID" />
+            </Principal>
+            <Dependent Role="Student">
+              <PropertyRef Name="Did" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="CollegeEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Departments" EntityType="Self.Department" />
+          <EntitySet Name="Students" EntityType="Self.Student" />
+          <AssociationSet Name="FK__Student__Did__398D8EEE" Association="Self.FK__Student__Did__398D8EEE">
+            <End Role="Department" EntitySet="Departments" />
+            <End Role="Student" EntitySet="Students" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="CollegeModelStoreContainer" CdmEntityContainer="CollegeEntities">
+          <EntitySetMapping Name="Departments">
+            <EntityTypeMapping TypeName="CollegeModel.Department">
+              <MappingFragment StoreEntitySet="Department">
+                <ScalarProperty Name="D_Name" ColumnName="D_Name" />
+                <ScalarProperty Name="D_ID" ColumnName="D_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Students">
+            <EntityTypeMapping TypeName="CollegeModel.Student">
+              <MappingFragment StoreEntitySet="Student">
+                <ScalarProperty Name="Did" ColumnName="Did" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="S_Name" ColumnName="S_Name" />
+                <ScalarProperty Name="S_Age" ColumnName="S_Age" />
+                <ScalarProperty Name="S_Email" ColumnName="S_Email" />
+                <ScalarProperty Name="S_Password" ColumnName="S_Password" />
+                <ScalarProperty Name="S_Address" ColumnName="S_Address" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

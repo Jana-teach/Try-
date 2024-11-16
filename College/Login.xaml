@@ -1,0 +1,21 @@
+﻿<Page x:Class="College.Login"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:College"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="Login">
+
+    <Grid Height="450" Width="800" Background="white">
+        <Label Content="Email" Margin="163,124,480,268" FontFamily="Arial Black" FontSize="20"/>
+        <Label Content="Password" Margin="163,187,480,205" FontFamily="Arial Black" FontSize="20"/>
+        <TextBox x:Name="emailtxt" TextWrapping="Wrap" Text="" Margin="300,116,168,297"/>
+        <TextBox x:Name="passtxt" TextWrapping="Wrap" Text="" Margin="300,187,168,226"/>
+        <Button Content="Login" HorizontalAlignment="Left" Margin="472,313,0,0" VerticalAlignment="Top" Height="43" Width="96" Click="LOGIN_Click"/>
+        <Button Content="Signup" HorizontalAlignment="Left" Margin="234,313,0,0" VerticalAlignment="Top" Height="43" Width="96" RenderTransformOrigin="0.658,0.047" Click="Signup_Click_1"/>
+        <Label Content="LOGIN" Margin="360,29,360,363" FontFamily="Arial Black" FontSize="20" RenderTransformOrigin="0.844,0.508"/>
+
+    </Grid>
+</Page>

@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="CollegeModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Department">
+    <Key>
+      <PropertyRef Name="D_ID" />
+    </Key>
+    <Property Name="D_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="D_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <NavigationProperty Name="Students" Relationship="Self.FK__Student__Did__398D8EEE" FromRole="Department" ToRole="Student" />
+  </EntityType>
+  <EntityType Name="Student">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="Did" Type="Int32" />
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="S_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="S_Age" Type="Int32" />
+    <Property Name="S_Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="S_Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="S_Address" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Department" Relationship="Self.FK__Student__Did__398D8EEE" FromRole="Student" ToRole="Department" />
+  </EntityType>
+  <Association Name="FK__Student__Did__398D8EEE">
+    <End Role="Department" Type="Self.Department" Multiplicity="0..1" />
+    <End Role="Student" Type="Self.Student" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Department">
+        <PropertyRef Name="D_ID" />
+      </Principal>
+      <Dependent Role="Student">
+        <PropertyRef Name="Did" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="CollegeEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Departments" EntityType="Self.Department" />
+    <EntitySet Name="Students" EntityType="Self.Student" />
+    <AssociationSet Name="FK__Student__Did__398D8EEE" Association="Self.FK__Student__Did__398D8EEE">
+      <End Role="Department" EntitySet="Departments" />
+      <End Role="Student" EntitySet="Students" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
